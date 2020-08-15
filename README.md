@@ -1,5 +1,7 @@
 # hello-world
 
+[![Build Status](https://travis-ci.com/sungjini/cpp-practice.svg?branch=master)](https://travis-ci.com/sungjini/cpp-practice)
+
 # environmenet
 
 support for development
