@@ -5,4 +5,13 @@
 support for development
 
 github
-travis
+
+### travis
+
+github, travis 연동
+* https://lindarex.github.io/travis-ci/travis-github-pages-jekyll-setting/
+
+travis 설정
+* https://docs.travis-ci.com/user/languages/cpp/
+* http://david-grs.github.io/cpp-clang-travis-cmake-gtest-coveralls-appveyor/
+
