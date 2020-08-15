@@ -8,6 +8,7 @@ support for development
 
 github
 
+
 ### travis
 
 github, travis 연동
@@ -16,4 +17,13 @@ github, travis 연동
 travis 설정
 * https://docs.travis-ci.com/user/languages/cpp/
 * http://david-grs.github.io/cpp-clang-travis-cmake-gtest-coveralls-appveyor/
+
+### coveralls
+
+* https://coveralls.io/github/sungjini/cpp-practice
+
+# c++ compiler support
+
+* https://en.cppreference.com/w/cpp/compiler_support
+* https://gcc.gnu.org/projects/cxx-status.html
 
