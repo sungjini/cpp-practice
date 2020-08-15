@@ -116,4 +116,9 @@ sanitizer_test.cpp:6:25: warning: array index 3 is past the end of the array (wh
 SUMMARY: MemorySanitizer: use-of-uninitialized-value (/home/sjcho/Cpp/cpp-practice/tools/a.out+0x4892bb)
 Exiting
 
+### fuzzy test
 
+### valgrind
+
+callgrind
+kcachegrind
