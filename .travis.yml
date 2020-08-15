@@ -1,5 +1,7 @@
 language: cpp
 
+install: make cmake
+
 addons:
   apt:
 	  sources:
