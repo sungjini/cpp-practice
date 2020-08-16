@@ -16,8 +16,12 @@ github
 * https://en.cppreference.com/w/cpp/compiler_support
 * https://gcc.gnu.org/projects/cxx-status.html
 
-
 # Tools
+
+### CMake
+
+* https://github.com/jacking75/examples_CMake
+
 
 ### travis
 
@@ -32,6 +36,9 @@ travis 설정
 
 * https://coveralls.io/github/sungjini/cpp-practice
 
+### static analysis
+
+clang-tidy, cppcheck 둘 다 check
 
 ### sanitizer
 
