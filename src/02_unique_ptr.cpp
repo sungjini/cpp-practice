@@ -33,7 +33,8 @@ class A
 
 void do_something()
 {
-  // A* pa = new A();
+  // 직접 생성하는 대신unique_ptr 이용 
+  // A* pc = new A();
   /*
    * uniqut_ptr 변수인 pa는 stack 변수라 do_something 종료시 메모리 자동 해제됨
    * (소멸자 호출)
@@ -43,11 +44,18 @@ void do_something()
   pa->some();
   
   /*
+   * 아래 코드는 에러남 (attempting to reference a deleted function
+   * 이유는 unique_ptr의 경우 copy constructor에 대해 delete 로 구현했기 때문에
+   */
+  //std::unique_ptr<A> pb = pa;
+
+  /*
    * error: use of deleted function
    * unique_ptr의 copy constructor는 명시적으로 삭제되어있음
    * 왜냐하면, 어떤 객체를 유일하게 소유하도록 구현되어있기 때문에
    * (double free 문제 방지 위해)
    * 
+   * [소유권 이전으로]
    * uniqu_ptr은 복사되지 않고, 소유권 이전할 수 있다.
    * - move constructor는 정의되어 있음
    * 
@@ -78,16 +86,30 @@ void do_function2(std::unique_ptr<A> ptr) {
 }
 
 int main() {
+  // step 1. unique_ptr 개념 이해
   do_something();
 
+  // step 2. unique_ptr 함수에 전달하는 방법
+  // unique_ptr을 reference 함수에 전달하는 것은 소유권이 함수내에서도 있게 됨
+  // unique_ptr이 소유권이라는 의미를 망각한채 단순히 포인터 wrapper로 사용하는 것임
+
+
+  // 소유권은 이동하지 않고, 함수내에서 일시적으로 접근하고 싶을 때,
+  // unique_ptr은 caller의 stack이 끝날 때 release 됨
   std::unique_ptr<A> pa(new A());
   do_function(pa.get());
 
+  // 소유권을 이동 시키면서 사용하는 방법
   do_function2(std::move(pa));
   std::cout << "이전 후 : " << pa.get() << std::endl;
 
   auto pb = std::make_unique<A>();
   std::vector<std::unique_ptr<A>> vec;
+
+  /*
+   * 아래는 unique_ptr의 복사 생성자에 접근하기 때문에 에러가 발생한다.
+   * 그래서 rvalue를 받는 생성자가 호출되도록 수정
+   */
   //vec.push_back(pb);
   /*
    * error: use of deleted function
@@ -100,6 +122,7 @@ int main() {
   /*
    * 방안 2) emplace_back은 perfect forwarding을 통해
    * unique_ptr<A> 객체를 직접 생성하기 떄문에, move 연산이 필요없게 됨
+   * ※ 가장 효율적인 방안임
    */
   vec.emplace_back(std::make_unique<A>());
   vec.back()->some();
